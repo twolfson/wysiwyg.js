@@ -450,7 +450,7 @@
                         break;
                     // special meaning
                     case 'image':
-                    case 'html':
+                    case 'html':                    
                     case 'popup':
                     case 'click':
                     case 'showstatic':
