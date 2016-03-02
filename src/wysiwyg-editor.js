@@ -77,12 +77,12 @@
                 $followbutton = toolbar_button(toolbar_followLink).prop({'href': currentVal, 'target': '_blank'});
             var $inputurl = $('<input type="text" value="">').val( currentVal )  // prop('href') does not reflect real value
                                 .addClass('wysiwyg-input')
+                                .blur(function(event){
+                                    $followbutton.prop( 'href', $inputurl.val() );
+                                })
                                 .keypress(function(event){
                                     if( event.which != 10 && event.which != 13 )
-                                    {
-                                        $followbutton.prop( 'href', $inputurl.val() );
                                         return ;
-                                    }
 
                                     if( $modify_link )
                                     {
