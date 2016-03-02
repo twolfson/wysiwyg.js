@@ -54,7 +54,7 @@
     };
 
     // Create the Editor
-    var create_editor = function( $textarea, classes, placeholder, toolbar_position, toolbar_buttons, toolbar_submit, label_followLink, label_selectImage,
+    var create_editor = function( $textarea, classes, placeholder, toolbar_position, toolbar_buttons, toolbar_submit, toolbar_followLink, label_selectImage,
                                   placeholder_url, placeholder_embed, max_imagesize, filter_imageType, on_imageupload, force_imageupload, video_from_url,
                                   on_keydown, on_keypress, on_keyup, on_autocomplete )
     {
@@ -73,8 +73,8 @@
         {
             var $followbutton = $();
             var currentVal = $modify_link ? $modify_link.attr('href') : '';
-            if( label_followLink )
-                $followbutton = toolbar_button(label_followLink).prop({'href': currentVal, 'target': '_blank'});
+            if( toolbar_followLink )
+                $followbutton = toolbar_button(toolbar_followLink).prop({'href': currentVal, 'target': '_blank'});
             var $inputurl = $('<input type="text" value="">').val( currentVal )  // prop('href') does not reflect real value
                                 .addClass('wysiwyg-input')
                                 .keypress(function(event){
@@ -898,7 +898,7 @@
                     toolbar_position = option.toolbar || 'top',
                     toolbar_buttons = option.buttons || {},
                     toolbar_submit = option.submit,
-                    label_followLink = option.followLink,
+                    toolbar_followLink = option.followLink,
                     label_selectImage = option.selectImage,
                     placeholder_url = option.placeholderUrl || null,
                     placeholder_embed = option.placeholderEmbed || null,
@@ -913,7 +913,7 @@
                     on_autocomplete = option.onAutocomplete || null;
 
                 // Create the WYSIWYG Editor
-                var data = create_editor( $that, classes, placeholder, toolbar_position, toolbar_buttons, toolbar_submit, label_followLink, label_selectImage,
+                var data = create_editor( $that, classes, placeholder, toolbar_position, toolbar_buttons, toolbar_submit, toolbar_followLink, label_selectImage,
                                           placeholder_url, placeholder_embed, max_imagesize, filter_imageType, on_imageupload, force_imageupload, video_from_url,
                                           on_keydown, on_keypress, on_keyup, on_autocomplete );
                 $that.data( 'wysiwyg', data );
