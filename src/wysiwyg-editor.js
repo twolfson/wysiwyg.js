@@ -54,7 +54,7 @@
     };
 
     // Create the Editor
-    var create_editor = function( $textarea, classes, placeholder, toolbar_position, toolbar_buttons, toolbar_submit, toolbar_followLink, toolbar_removeLink, label_selectImage,
+    var create_editor = function( $textarea, classes, placeholder, toolbar_position, toolbar_buttons, toolbar_submit, toolbar_followLink, label_selectImage,
                                   placeholder_url, placeholder_embed, max_imagesize, filter_imageType, on_imageupload, force_imageupload, video_from_url,
                                   on_keydown, on_keypress, on_keyup, on_autocomplete )
     {
@@ -71,18 +71,10 @@
         };
         var content_insertlink = function(wysiwygeditor, $modify_link)
         {
-            var currentVal = $modify_link ? $modify_link.attr('href') : '';
             var $followbutton = $();
+            var currentVal = $modify_link ? $modify_link.attr('href') : '';
             if( toolbar_followLink )
                 $followbutton = toolbar_button(toolbar_followLink).prop({'href': currentVal, 'target': '_blank'});
-            var $removebutton = $();
-            if( toolbar_removeLink )
-                $removebutton = toolbar_button(toolbar_removeLink).click(function(event){
-                                    wysiwygeditor.removeLink().closePopup().collapseSelection();
-                                    event.stopPropagation();
-                                    event.preventDefault();
-                                    return false;
-                                });
             var $inputurl = $('<input type="text" value="">').val( currentVal )  // prop('href') does not reflect real value
                                 .addClass('wysiwyg-input')
                                 .keyup(function(event){
@@ -118,10 +110,7 @@
                                 });
             var $content = $('<div/>').addClass('wysiwyg-toolbar-form')
                                       .prop('unselectable','on');
-            $content.append($inputurl)
-                .append($followbutton)
-                .append($okaybutton)
-                .append($removebutton);
+            $content.append($inputurl).append($followbutton).append($okaybutton);
             return $content;
         };
 
@@ -910,7 +899,6 @@
                     toolbar_buttons = option.buttons || {},
                     toolbar_submit = option.submit,
                     toolbar_followLink = option.followLink,
-                    toolbar_removeLink = option.removeLink,
                     label_selectImage = option.selectImage,
                     placeholder_url = option.placeholderUrl || null,
                     placeholder_embed = option.placeholderEmbed || null,
@@ -925,7 +913,7 @@
                     on_autocomplete = option.onAutocomplete || null;
 
                 // Create the WYSIWYG Editor
-                var data = create_editor( $that, classes, placeholder, toolbar_position, toolbar_buttons, toolbar_submit, toolbar_followLink, toolbar_removeLink, label_selectImage,
+                var data = create_editor( $that, classes, placeholder, toolbar_position, toolbar_buttons, toolbar_submit, toolbar_followLink, label_selectImage,
                                           placeholder_url, placeholder_embed, max_imagesize, filter_imageType, on_imageupload, force_imageupload, video_from_url,
                                           on_keydown, on_keypress, on_keyup, on_autocomplete );
                 $that.data( 'wysiwyg', data );
